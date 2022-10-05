@@ -1,5 +1,5 @@
 # Urban Flow Model
-The aim of this repository is to create a ML generative model of urban flows using numerical data from LES simulations as the training data. The numerical data must be downloaded before running the code.
+The aim of this repository is to create a ML generative model of urban flows using numerical data from LES simulations as the training data. The numerical data must be downloaded before running the code. For more information view [these slides](https://docs.google.com/presentation/d/1cmR50dbi_q6vtUD7X-hjMk6sTnbxEaDT4QtCdea1QtQ/edit?usp=sharing).
 
 The workflow scripts are described in the sections below. To execute 2-3-4 using docker run `build_run_docker.sh` and execute `main.sh`. See `main.sh` for more information on the workflow parameters, inputs and outputs.
 
