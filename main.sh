@@ -59,7 +59,8 @@ Ly=100
 # - lr: Initial learning rate for the learning schedule
 # - train: True to train model or False to load existing model
 # - model_dir: Directory to save or load the model
-# - num_synthetic_samples: Number of synthetic samples to generate
+# - num_synthetic_samples: Number of synthetic samples to generate for original and interpolated labels
+# - interp_labels: Interpolated labels to generate synthetic data
 # OUTPUTS:
 # - All outputs are written to the model_dir
 # - Outputs include images, weights, reconstructed and generated data
@@ -79,7 +80,8 @@ python3 main-cvae.py \
 	--lr 0.01 \
 	--train False \
 	--model_dir ${model_dir} \
-	--num_synthetic_samples 1000
+	--num_synthetic_samples 3000 \
+	--interp_labels 0.1---0.2---0.4---0.5---0.6---0.7---0.8---0.9 
 
 
 # Turbulent statistics: Mean velocities and Reynolds stress components

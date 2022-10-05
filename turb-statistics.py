@@ -92,14 +92,13 @@ if __name__ == '__main__':
     )
 
     # Split data in cases:
-    cases = np.sort(np.unique(labels_test))
+    test_cases = np.sort(np.unique(labels_test))
+    gen_cases = np.sort(np.unique(labels_gen))
 
-    for case in cases:
+    for case in test_cases:
         cname = str(case)
         id_test = labels_test == case
-        id_gen = labels_gen == case
         print('\nNumber of samples for case D={}: {}'.format(cname, str(len(id_test[id_test]))), flush = True)
-
         print('\nProcessing original data')
         U = X_test[id_test, :, :, :]
         U_mean = np.mean(U, axis = 0)
@@ -114,6 +113,8 @@ if __name__ == '__main__':
         UU = calculate_UU(U, U_mean)
         plot_velocities(UU, X, Y, case, ['uu', 'uv', 'uw', 'vv', 'vw', 'ww'], path = os.path.join(stats_dir, 'reconstructed_UU_mean_{}.png'.format(case)))
 
+    for case in gen_cases:
+        id_gen = labels_gen == case
         print('\nNumber of generated samples for case D={}: {}'.format(cname, str(len(id_gen[id_gen]))), flush = True)
         print('\nProcessing generated data')
         U = X_gen[id_gen, :, :, :]
