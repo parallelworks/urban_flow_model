@@ -33,12 +33,12 @@ Ly=100
 # - Every subdirectory contains three numpy arrays:
 #       Mesh: X-<Lx>-<Ly>.npy and Y-<Lx>-<Ly>.npy (Same for all cases)
 #       Velocities: UVW-<Lx>-<Ly>.npy (shape: nsamples x Ly x Lx x 3)
-#python3 map-interpolate.py \
-#	--urban_data_dir ${data_dir} \
-#	--Bw 0.5 \
-#	--dt_ref 0.07 \
-#	--Ly ${Ly} \
-#	--Lx ${Lx}
+python3 map-interpolate.py \
+	--urban_data_dir ${data_dir} \
+	--Bw 0.5 \
+	--dt_ref 0.07 \
+	--Ly ${Ly} \
+	--Lx ${Lx}
 
 
 # Train ML model and/or use existing model to generate synthetic data
