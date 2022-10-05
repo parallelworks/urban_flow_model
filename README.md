@@ -1,7 +1,7 @@
 # Urban Flow Model
 The aim of this repository is to create a ML generative model of urban flows using numerical data from LES simulations as the training data. The numerical data must be downloaded before running the code.
 
-The workflow scripts are described in the sections below. To execute 2-3-4 using docker run `build_run_docker.sh`. See `main.sh` for more information on the workflow parameters, inputs and outputs.
+The workflow scripts are described in the sections below. To execute 2-3-4 using docker run `build_run_docker.sh` and execute `main.sh`. See `main.sh` for more information on the workflow parameters, inputs and outputs.
 
 ### 1. extract-centerplane.py:
 - Takes the full 3D velocity fields and extracts and saves the centerplane (z=0).
