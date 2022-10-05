@@ -1,19 +1,34 @@
 import os, glob
+import argparse
 
 import matplotlib.pyplot as plt
 from scipy.interpolate import interp2d, interp1d
 import numpy as np
 
-urban_data_dir = 'urban-data'
+
+def read_args():
+    parser=argparse.ArgumentParser()
+    parsed, unknown = parser.parse_known_args()
+    for arg in unknown:
+        if arg.startswith(("-", "--")):
+            parser.add_argument(arg)
+    args=vars(parser.parse_args())
+    print(args)
+    return args
+
+
+args = read_args()
+
+urban_data_dir = args['urban_data_dir']
 # Building width                   
-Bw = 0.5
+Bw = float(args['Bw'])
 x0 = Bw/2 # End of first building
 # Common DT for all fields:
-dt_ref = 0.07
+dt_ref = float(args['dt_ref'])
 
 # Dimensions of new mesh:
-Ly = 100
-Lx = 100
+Ly = int(args['Ly'])
+Lx = int(args['Lx'])
 
 
 def load_resample_merge_fields(data_dir):
@@ -149,18 +164,6 @@ if __name__ == '__main__':
     } 
 
     
-    # Base mesh is SF mesh
-    # - All cases are interpolated to this mesh!
-    #REF_MESH = 'IR'
-    #Xc = np.load(os.path.join(Fields[REF_MESH]['DIR'], 'X.npy'))
-    #Xc = (Xc-x0)/(Fields[REF_MESH]['DISTANCE'] - Bw)
-    #Yc = np.load(os.path.join(Fields[REF_MESH]['DIR'], 'Y.npy'))
-    #Xc = np.flip(Xc, axis = 0)
-    #Yc = np.flip(Yc, axis = 0)
-    #print(Xc.shape, Yc.shape)
-    #Xc, Yc = trim_tensor(Xc, Yc, 0, 1, 0, 1)
-    #print(Xc.shape, Yc.shape)
-
     step_x = 1/(Lx-1)
     step_y = 0.03 #1/(Ly-1)
     
@@ -168,13 +171,6 @@ if __name__ == '__main__':
     yi = np.geomspace(step_y, 1+step_y, Ly) - step_y
 
     Xc, Yc = np.meshgrid(xi, yi)
-    #print(Ly)
-    #print(xi.shape)
-    #print(xi)
-    #print(Yc[:,0])
-    # Distance between x points is 0.0058, there is no point at 0 or 1
-    #print(min(Xc[0,:]), max(Xc[0, :]))
-    #quit()
     for k,v in Fields.items():
         print('Processing: ', k)
         process_field(v, Xc, Yc)

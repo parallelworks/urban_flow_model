@@ -1,6 +1,17 @@
 # https://keras.io/examples/generative/vae/
 import os, json
-import pickle
+import argparse
+
+def read_args():
+    parser=argparse.ArgumentParser()
+    parsed, unknown = parser.parse_known_args()
+    for arg in unknown:
+        if arg.startswith(("-", "--")):
+            parser.add_argument(arg)
+    args=vars(parser.parse_args())
+    print(args)
+    return args
+
 
 import numpy as np
 import pandas as pd
@@ -53,12 +64,13 @@ def calculate_UU(U, U_mean):
 
 
 if __name__ == '__main__':
+    args = read_args()
     # Load test data --> Split into cases by label
-    data_dir = 'urban-data'
-    model_dir = 'urban-cvae'
-    stats_dir = 'urban-stats'
-    Lx = 100
-    Ly = 100
+    data_dir = args['data_dir']
+    model_dir = args['model_dir']
+    stats_dir = args['stats_dir']
+    Lx = int(args['Lx'])
+    Ly = int(args['Ly'])
 
     os.makedirs(stats_dir, exist_ok = True)
 
